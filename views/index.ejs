@@ -1,0 +1,113 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .header-title {
+          display: flex;
+          align-items: center;
+        }
+      
+        .header-title i {
+          margin-right: 8px;
+          margin-top: 5px;
+        }
+        
+        .table-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin: 20px 10px;
+        }
+      
+        .table-container table {
+          width: 100%;
+          padding: 10px;
+        }
+        
+        .table-wrapper {
+          width: 48%;
+          margin-bottom: 20px;
+        }
+        
+        @media only screen and (max-width: 1080px) {
+          /* Adjust layout for smaller screens */
+          .table-wrapper {
+            width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+    <h4 class="header-title"><i class="medium material-icons">import_export</i> Stripe Integration</h4>
+    
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Disclosure</span>
+                    <p>This is a one-page prototype Node.js application that integrates with Stripe using their API. The page retrieves a fresh list of customers and payment intents with each reload. Author: Ihor Vasiuta, exclusively for Spendbase.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-wrapper">
+            <h5 class="header-title"><i class="small material-icons">account_box</i> All Customers:</h5>
+            <table class="highlight">
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Balance</th>
+                    <th>Date Created</th>
+                </tr>
+                <% customers.forEach((customer)=> { %>
+                <tr>
+                    <td>
+                        <%= customer.id %>
+                    </td>
+                    <td>
+                        <%= customer.email %>
+                    </td>
+                    <td>
+                        <%= customer.balance + " USD" %>
+                    </td>                
+                    <td>
+                        <%= new Date(customer.created * 1000).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) %>
+                    </td>    
+                </tr>         
+                <% }) %>
+            </table>
+        </div>
+        <div class="table-wrapper">
+            <h5 class="header-title"><i class="small material-icons">account_balance_wallet</i> All Payment Intents:</h5>
+            <table class="highlight">
+                <tr>
+                    <th>Amount</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                    <th>Capture Method</th>
+                </tr>
+                <% paymentIntents.forEach((paymentIntent)=> { %>
+                <tr>
+                    <td>
+                        <%= (paymentIntent.amount / 100) + " " + paymentIntent.currency %>
+                    </td>
+                    <td>
+                        <%= new Date(paymentIntent.created * 1000).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true }) %>
+                    </td> 
+                    <td>
+                        <%= paymentIntent.status %>
+                    </td>  
+                    <td>
+                        <%= paymentIntent.capture_method %>
+                    </td>                                              
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
