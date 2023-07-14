@@ -1,4 +1,4 @@
-# [Stripe Integration Node.js App] (https://stripe-integration.cyclic.app/)
+# [Stripe Integration Node.js App](https://stripe-integration.cyclic.app/)
 
 This is [a prototype Node.js application that integrates with Stripe](https://stripe-integration.cyclic.app/) using their API hosted on Cyclic. The app retrieves a fresh list of customers and payment intents from Stripe with each reload. It provides a simple web interface to display the data.
 
